@@ -8,3 +8,7 @@ readable_eq_file = 'data/readable_eq_data_ss.json'
 
 with open(readable_eq_file, 'w') as rdf:
     json.dump(readable_eq_data, rdf, indent=4)
+
+all_eq_data = readable_eq_data['features']
+
+print(len(all_eq_data))
