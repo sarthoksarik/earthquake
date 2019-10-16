@@ -13,13 +13,14 @@ with open(readable_eq_file, 'w') as rdf:
 
 all_eq_data = readable_eq_data['features']
 
-prop_list = (mags, lons, lats) = ([], [], [])
+prop_list = (mags, lons, lats, hover_texts) = ([], [], [], [])
 
 for eq_data in all_eq_data:
     mag = eq_data['properties']['mag']
     lon = eq_data['geometry']['coordinates'][0]
     lat = eq_data['geometry']['coordinates'][1]
-    prop_values = (mag, lon, lat)
+    title = eq_data['properties']['title']
+    prop_values = (mag, lon, lat, title)
     for props, vals in zip(prop_list, prop_values):
         props.append(vals)
 
@@ -32,8 +33,9 @@ for eq_data in all_eq_data:
 eq_data = [{'type': 'scattergeo',
             'lon': lons,
             'lat': lats,
+            'text': hover_texts,
             'marker': {
-                'size': [mag**2 for mag in mags],
+                'size': [mag*4 for mag in mags],
                 'color': mags,
                 'colorscale': 'Viridis',
                 'reversescale': True,
