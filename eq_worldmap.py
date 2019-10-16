@@ -33,7 +33,7 @@ eq_data = [{'type': 'scattergeo',
             'lon': lons,
             'lat': lats,
             'marker': {
-                'size': [3.5*mag for mag in mags],
+                'size': [mag**2 for mag in mags],
                 'color': mags,
                 'colorscale': 'Viridis',
                 'reversescale': True,
