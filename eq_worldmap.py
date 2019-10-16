@@ -2,7 +2,7 @@ import json
 from plotly.graph_objs import Scattergeo, Layout
 from plotly import offline
 
-eq_raw_data_file = 'data/eq_data_1_day_m1.json'
+eq_raw_data_file = r'data\eq_data_30_day_m1.json'
 
 with open(eq_raw_data_file) as df:
     readable_eq_data = json.load(df)
@@ -29,7 +29,17 @@ for eq_data in all_eq_data:
 
 # map the earthquakes
 
-eq_data = [Scattergeo(lon=lons, lat=lats)]
+eq_data = [{'type': 'scattergeo',
+            'lon': lons,
+            'lat': lats,
+            'marker': {
+                'size': [3.5*mag for mag in mags],
+                'color': mags,
+                'colorscale': 'Viridis',
+                'reversescale': True,
+                'colorbar':{'title': 'Magnitude', },
+            },
+            }]
 eq_layout = Layout(title='Global Earthquakes')
 
 eq_wm_fig = {'data': eq_data, 'layout': eq_layout}
